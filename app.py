@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -8,20 +10,20 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
 
-app = Flask(__name__)                                                   #Creating an instance of Flask class with name(name is equal to __main__ as it runs itself and not imported)
+app = Flask(__name__)
 
-app.secret_key = 'sasha'                                                #Anything that requires encryption (for safe-keeping against tampering by attackers)
-                                                                        #requires the secret key to be set. For just Flask itself, that 'anything' is the Session object,#
-                                                                        #but other extensions can make use of the same secret.
+app.secret_key = 'sasha'
 api = Api(app)
-app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI']= os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-jwt = JWT(app, authenticate, identity)                              # /authorization decorator, passes the parameters to security.py for processing
+
+jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Store, '/store/<string:name>')
 api.add_resource(StoreList,'/stores')
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
+
 api.add_resource(UserRegister, '/register')
 
 
