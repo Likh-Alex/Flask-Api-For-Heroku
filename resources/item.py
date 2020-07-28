@@ -26,25 +26,25 @@ class Item(Resource):
         item = ItemModel.find_by_name(name)
         if item:
             return item.json()
-        return {'message':'item not found'}, 404
+        return {'message':"item not found"}, 404
 
     #Post new item into DB
     def post(self, name):
         if ItemModel.find_by_name(name):
-            return {'message':f'An item with name {name} already exists'}, 400
+            return {'message':"An item already exists"}, 400
         data = Item.parser.parse_args()
         item = ItemModel(name, **data)
         try:
             item.save_to_db()
         except:
-            return {"message":"An error occured inserting the item"}, 500
+            return 500
         return item.json(), 201
 
     def delete(self,name):
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
-            return {'message':'Item deleted'}
+            return {'message':"Item deleted"}
         else:
             return {'message':"Item does not exist"}
 
