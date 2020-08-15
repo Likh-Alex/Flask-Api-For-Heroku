@@ -1,5 +1,12 @@
-# Stores REST api
-
-This is built with Flask, Flask-RESTful, Flask_jwt and Flask-SQLAlchemy
-
-Deployed on Heroku
+# A simple API
+This API writen on base of CRUD principles
+# What is it for
+API uses resources such Users,Stores and Items.
+All resources support CRUD.
+# How it's done
+I have writen this API after mastering:
+* Python
+* Flask
+* Flask-RESTful
+* Flask-SQLAlchemy
+* JWT and JWT-refreshing
