@@ -4,7 +4,7 @@ This API writen on base of CRUD principles
 API uses resources such Users,Stores and Items.
 All resources support CRUD.
 # How it's done
-I have writen this API after mastering:
+I have writen this API using:
 * Python
 * Flask
 * Flask-RESTful
